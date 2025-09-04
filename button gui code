@@ -1,0 +1,12 @@
+from tkinter import *
+root = Tk()
+root.geometry('200x500')#where to create the button
+btn = Button(root, text = 'Click me!', bd= 6, background='blue',
+              activebackground='green', activeforeground='yellow', command=root.destroy)
+btn.pack(side = 'top')
+
+
+
+
+
+root.mainloop()
