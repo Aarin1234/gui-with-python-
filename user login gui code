@@ -1,0 +1,11 @@
+from tkinter import*
+hello = Tk()
+hello.title('login window!')
+hello.geometry('600x300')
+hello.config(background='pink')
+user_name = Label(hello, text='username', bg='light green')#label creation
+user_name.place(x=40, y=60)
+user_name_input_area = Entry(hello, width=30)#text box creation
+user_name_input_area.place(x=115, y=58)
+
+hello.mainloop()
