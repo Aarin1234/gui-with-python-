@@ -1,0 +1,7 @@
+from tkinter import*
+window = Tk()
+
+w = Spinbox(window, from_ = 0, to = 10, increment = 0.5, format = "%04.2f")
+w.pack()
+
+window.mainloop()
