@@ -1,0 +1,31 @@
+from tkinter import*
+from tkinter.ttk import*
+root = Tk()
+root.geometry("175x350")
+root.title("Progress Bar!")
+progress = Progressbar(root, orient = HORIZONTAL, length = 100, mode = "determinate")
+def bar():
+    import time
+    progress["value"] = 20
+    root.update_idletasks()
+    time.sleep(1)
+    #now we start making the 40% progress
+    progress["value"] = 40
+    root.update_idletasks()
+    time.sleep(1.7)
+    #now the 60% progress
+    progress["value"] = 60
+    root.update_idletasks()
+    time.sleep(0.9)
+    #now we make the 80% progress
+    progress["value"] = 80
+    root.update_idletasks()
+    time.sleep(0.4)
+    #the final 100% progress
+    progress["value"] = 100
+
+
+progress.pack()
+button = Button(root, text = "start", command=bar)
+button.pack(pady = 30)
+root.mainloop()
