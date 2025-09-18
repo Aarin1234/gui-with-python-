@@ -1,0 +1,32 @@
+from tkinter import*
+root = Tk()
+root.geometry("650x400")
+root.title("frame")
+w = Label(root, text = "cakes and ice cream", font  = 50, bg = "light blue")
+w.pack()
+# frame
+frame = Frame(root)
+frame.pack(pady = 22)
+#bottom frame
+bottom_frame = Frame(root)
+bottom_frame.pack(side = BOTTOM)
+#top 3 buttons
+b1_button = Button(frame, text = "Choco", fg = "red", bg = "cyan")
+b1_button.pack(side = LEFT)
+b2_button = Button(frame, text = "White Choco", fg = "green", bg = "yellow" )
+b2_button.pack(side = LEFT)
+
+
+
+#bottom 3 buttons
+b4_button = Button(bottom_frame, text = "cakes",  fg = "black", bg = "white")
+
+b4_button.pack(side = BOTTOM)
+
+b5_button = Button(bottom_frame, text = "ice cream",  fg = "light green", bg = "orange")
+
+b5_button.pack(side = BOTTOM)
+
+b6_button = Button(bottom_frame, text = "pastry",  fg = "purple", bg = "pink")
+b6_button.pack(side = BOTTOM)
+root.mainloop()
