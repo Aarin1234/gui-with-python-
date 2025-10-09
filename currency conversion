@@ -1,0 +1,40 @@
+from tkinter import*
+window = Tk()
+window.geometry("700x250")
+window.title("Currency Converter")
+window.configure(background= "green")
+
+
+
+#desinging the Converter
+dollarstring = Label(window, text='Dollars', bg= "blue")
+input_value = IntVar()
+dollarinputstring = Entry(window, textvariable= input_value) 
+
+
+poundreturn = Label(window, text= 'pounds', bg= 'yellow')
+pesoreturn = Label(window, text= 'Peso', bg= 'red')
+eurotreturn = Label(window, text= 'Euro', bg= 'black')
+
+poundconversion = Text(window, height = 2, width = 20)
+pesoconversion = Text(window, height = 2, width = 20)
+euroconversion = Text(window, height = 2, width = 20)
+
+conversion = Button(window, text= 'Convert', bd=6.7, fg= 'white', bg= 'black', command= None)
+
+dollarstring.grid(row=0, column=0, padx=25, pady=15)
+dollarinputstring.grid(row=0, column=1, padx=25, pady = 15)
+conversion.grid(row=0, column=2, padx=25, pady = 15)
+
+poundreturn.grid(row=2,column=0, pady = 20)
+pesoreturn.grid(row=2, column=1, pady = 20)
+eurotreturn.grid(row=2, column=2, pady = 20)
+
+poundconversion.grid(row=3,column=0, padx = 22)
+pesoconversion.grid(row=3,column=1, padx = 22)
+euroconversion.grid(row=3, column=2, padx = 22)
+
+
+
+
+window.mainloop()
