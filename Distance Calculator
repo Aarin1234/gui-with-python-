@@ -1,0 +1,48 @@
+from tkinter import*
+import tkinter.font as font
+root = Tk()
+root.geometry('400x300')
+root.title('Distance Calulator')
+#temp celsius is js dist time or celsius=time gng
+#creating funcs
+def dist_conv():
+    #to get the values form the entry boxes
+        speed = float(entry_speed.get())
+        time_minutes = float(entry_time.get())
+
+
+        # Convert time from minutes to hours
+        time_hours = time_minutes / 60.0
+
+        # Calculate distance (Distance = Speed * Time)
+        distance = speed * time_hours
+
+        # Display the result in the label
+        answer_label.config(text=f"Distance Covered: {distance:f} km")
+
+
+#making the entry and label for the speed
+label_speed = Label(root, text="Speed (km/h):")
+label_speed.grid(row=0, column=0, padx=10, pady=10)
+
+
+entry_speed = Entry(root)
+entry_speed.grid(row=0, column=1, padx=10, pady=10)
+
+#making the entry and label for the time
+label_time = Label(root, text="Time (in minutes):")
+label_time.grid(row=1, column=0, padx=10, pady=10)
+
+
+entry_time = Entry(root)
+entry_time.grid(row=1, column=1, padx=10, pady=10)
+
+#making the entry and label for the calc btn
+calc_btn = Button(root, text="Calculate Distance", command=dist_conv)
+calc_btn.grid(row=2, column=0, pady=20)
+
+#making a label to show the answer/result
+answer_label = Label(root, text="Distance Covered: 0.00 km", font=("Arial", 12))
+answer_label.grid(row=3, column=0, pady=10)
+
+root.mainloop()
