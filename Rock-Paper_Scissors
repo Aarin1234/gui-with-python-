@@ -1,0 +1,121 @@
+from tkinter import*
+import random
+import tkinter.font as font
+player_score = 0
+
+computer_score = 0
+
+options = [('rock',0),('paper',1),('scissor',2)]
+
+#creating the functions
+def computer_win():
+    global player_score, computer_score
+    computer_score +=1
+    winner_label.config(text= 'The Computer Has WON!')
+
+    computer_score_label.config(text= 'computer score:' +str(computer_score))
+
+    player_score_label.config(text= 'player score:' + str(player_score))
+
+def player_win():
+    global player_score, computer_score
+    player_score +=1
+    winner_label.config(text= 'The Player Has Won!')
+
+    player_score_label.config(text= 'player score:' +str(player_score))
+
+    computer_score_label.config(text= 'computer score:' +str(computer_score))
+
+def tie():
+    global player_score, computer_score
+    winner_label.config(text= 'Its a Tie!')
+    player_score_label.config(text= 'player score:' +str(player_score))
+    computer_score_label.config(text= 'computer score:' +str(computer_score))
+
+
+def get_computer_choice():
+    return random.choice(options)
+    
+def get_player_choice(player_input):
+    global player_score, computer_score
+    print(player_input)
+    
+    computer_input = get_computer_choice()
+    print(computer_input)
+
+    player_choice_label.config(fg='white',text='you selected: '+player_input[0])
+    computer_choice_label.config(fg='white',text='computer selected: '+computer_input[0])
+    if player_input == computer_input:
+        tie()
+
+    if player_input[1] == 0:
+        if computer_input[1] == 1:
+            computer_win()
+        if computer_input[1] == 2:
+            player_win()
+
+    elif player_input[1] == 1:
+        if computer_input[1] == 2:
+            computer_win()
+        if computer_input[1] == 0:
+            player_win()
+
+    elif player_input[1] == 2:
+        if computer_input[1] == 1:
+            player_win()
+        if computer_input[1] == 0:
+            computer_win()
+
+    
+#creating the main window
+root = Tk()
+
+root.title('Rock-Paper_Scissors')
+
+root.configure(background="#CB0D0D")
+
+root.geometry('800x470')
+
+game_title = Label(root, text= 'Rock Paper Scissors', bg="#CB0D0D", fg= "#07D10E", font= font.Font(size=20))
+game_title.pack()
+
+winner_label = Label(root, text='Lets Start The Game',bg='black', fg=
+'white', font= font.Font(size=18))
+winner_label.pack()
+
+inputframe = Frame(root, bg='blue')
+inputframe.pack()
+
+player_option= Label(inputframe, text='your options:', font= font.Font(size=21), bg='#CB0D0D', fg='black')
+
+player_option.grid(row=0,column=0, pady=8)
+
+rock_btn = Button(inputframe, text='rock', width=17, bd=4, bg='green',
+                pady= 5, command=lambda: get_player_choice(options[0])) 
+
+paper_btn = Button(inputframe, text='paper', width=17, bd=4, bg='green',
+                pady= 5, command=lambda: get_player_choice(options[1]))     
+
+scissor_btn = Button(inputframe, text='scissor', width=17, bd=4, bg='green',
+                pady= 5, command=lambda: get_player_choice(options[2])) 
+scissor_btn.grid(row=3, column=5, padx=12)       
+
+score_label = Label(inputframe, text='score: ',font=font.Font(size=32),
+                        bg='blue', fg='yellow')
+                     
+player_choice_label = Label(inputframe, text='You Selected: ', 
+                        font=font.Font(size=32), bg='blue',fg='')
+
+player_score_label = Label(inputframe,  text='You Score: ', 
+                        font=font.Font(size=32), bg='blue',fg='')
+
+
+computer_choice_label = Label(inputframe, text='Computer Selected: ', 
+                        font=font.Font(size=32), bg='blue',fg='')
+
+
+computer_score_label = Label(inputframe,  text='Computer Score: ', 
+                        font=font.Font(size=32), bg='blue',fg='')
+
+
+root.mainloop()
