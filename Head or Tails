@@ -1,0 +1,92 @@
+from tkinter import *
+import random
+import tkinter.font as font
+
+player_score = 0
+computer_score = 0
+
+options = [('Head', 0), ('Tails', 1)]
+
+# --- Game Functions ---
+def computer_win():
+    global player_score, computer_score
+    computer_score += 1
+    winner_label.config(text='😢 Computer won!')
+    update_scores()
+
+def player_win():
+    global player_score, computer_score
+    player_score += 1
+    winner_label.config(text='🎉 You won!')
+    update_scores()
+
+
+
+def update_scores():
+    player_score_label.config(text='Player Score: ' + str(player_score))
+    computer_score_label.config(text='Computer Score: ' + str(computer_score))
+
+def get_computer_choice():
+    return random.choice(options)
+
+def get_player_choice(player_input):
+    computer_input = get_computer_choice()
+
+    player_choice_label.config(text='You Selected: ' + player_input[0], fg='white')
+    computer_choice_label.config(text='Computer Selected: ' + computer_input[0], fg='white')
+
+    if player_input == computer_input:
+        player_win()
+    elif player_input[1] == 0 and computer_input[1] == 1:
+        computer_win()
+    elif player_input[1] == 1 and computer_input[1] == 0:
+        computer_win()
+    else:
+        player_win()
+
+#Creating the Main Window
+root = Tk()
+root.title('Head or Tails')
+root.configure(background="#F58128")
+root.geometry('800x470')
+
+#Game Title
+game_title = Label(root, text='Head or Tails', bg="#CB0D0D", fg="#07D10E", font=font.Font(size=23))
+game_title.pack(pady=10)
+
+#Announcing Label
+winner_label = Label(root, text='Lets Start The Game!', bg='black', fg='white', font=font.Font(size=18))
+winner_label.pack(pady=10)
+
+#Frame for Buttons and Info
+inputframe = Frame(root, bg='blue')
+inputframe.pack(pady=10)
+
+#Player Options
+player_option = Label(inputframe, text='Your Options:', font=font.Font(size=21), bg='#CB0D0D', fg='black')
+player_option.grid(row=0, column=0, pady=10)
+
+#All Buttons
+heads_btn = Button(inputframe, text='Head', width=17, bd=4, bg='green', pady=5, 
+                   command=lambda: get_player_choice(options[0]))
+heads_btn.grid(row=1, column=0, padx=10, pady=5)
+
+tails_btn = Button(inputframe, text='Tails', width=17, bd=4, bg='green', pady=5, 
+                   command=lambda: get_player_choice(options[1]))
+tails_btn.grid(row=1, column=1, padx=10, pady=5)
+
+#Labels for the choices and scores
+player_choice_label = Label(inputframe, text='You Selected: ', font=font.Font(size=16), bg='blue', fg='white')
+player_choice_label.grid(row=2, column=0, columnspan=2, pady=5)
+
+computer_choice_label = Label(inputframe, text='Computer Selected: ', font=font.Font(size=16), bg='blue', fg='white')
+computer_choice_label.grid(row=3, column=0, columnspan=2, pady=5)
+
+player_score_label = Label(inputframe, text='Player Score: 0', font=font.Font(size=16), bg='blue', fg='yellow')
+player_score_label.grid(row=4, column=0, pady=10)
+
+computer_score_label = Label(inputframe, text='Computer Score: 0', font=font.Font(size=16), bg='blue', fg='yellow')
+computer_score_label.grid(row=4, column=1, pady=10)
+
+
+root.mainloop()
