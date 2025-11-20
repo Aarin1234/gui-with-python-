@@ -1,0 +1,34 @@
+from tkinter import*
+from tkinter.ttk import*
+import random
+from time import strftime
+root = Tk()
+root.title("Digital Clock")
+root.geometry("1500x300")
+def time():
+    string = strftime('%H:%M:%S  %p %b %a')
+    lbl.config(text=string)
+    lbl.after(1000, time)
+
+
+lbl = Label(root, font=('calibri', 90, 'bold'), background= 'green',foreground= 'red')
+lbl.pack(anchor='center')
+
+time()
+
+
+
+
+
+root.mainloop()
+
+
+
+
+'''
+%p is for am/pm
+%b is for the shorter name of the month
+%B is for the longer name of the month
+%a is is for the shorter name of the weekday
+%A is for the longer name of the weekday
+'''
