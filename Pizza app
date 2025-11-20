@@ -1,0 +1,60 @@
+from tkinter import *
+
+#Creating the Functions
+
+def choose_size(variable):
+    global selected_size
+    selected_size = variable
+    size_label.config(text="Selected Size: " + selected_size)
+
+def order():
+    if selected_size == "":
+        output_label.config(text="Please choose a pizza size first.")
+        return
+
+    toppings = toppings_entry.get().strip()
+
+    if toppings == "":
+        order_name = f"You ordered a {selected_size} pizza with no extra toppings."
+    else:
+        order_name = f"You ordered a {selected_size} pizza with: {toppings}"
+
+    output_label.config(text=order_name)
+
+
+#Making The Main Window
+
+root = Tk()
+root.title("Pizza App")
+root.geometry("350x300")
+
+Label(root, text="Pizza Ordering App", font=("Arial", 16,)).place(x=70, y=10)
+
+selected_size = ""
+
+#Creating the Size Selection Buttons
+Label(root, text="Choose The Size:", font=("Arial", 12)).place(x=20, y=60)
+
+small_btn = Button(root, text="Small",bg="#B44E00" ,width=10, command=lambda: choose_size("Small")).place(x=20, y=90)
+medium_btn = Button(root, text="Medium", width=10,bg="#CA5800" ,command=lambda: choose_size("Medium")).place(x=120, y=90)
+Large_btn = Button(root, text="Large", width=10,bg="#FF6F00", command=lambda: choose_size("Large")).place(x=220, y=90)
+
+#show the selected size
+size_label = Label(root, text="Selected Size: None", font=("Arial", 11))
+size_label.place(x=20, y=130)
+
+#the entry for the toppings
+Label(root, text="Enter Toppings (use comma if entering more):", font=("Arial", 12)).place(x=20, y=160)
+
+toppings_entry = Entry(root, width=30)
+toppings_entry.place(x=20, y=190)
+
+#order button
+Button(root, text="Order", width=15, command=order).place(x=20, y=225)
+
+#the label for the output
+output_label = Label(root, text="", wraplength=300, font=("Arial", 11))
+output_label.place(x=20, y=260)
+
+
+root.mainloop()
