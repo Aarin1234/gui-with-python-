@@ -1,0 +1,63 @@
+from tkinter import*
+from tkinter.filedialog import*
+from tkinter import ttk
+
+root = Tk()
+root.geometry('600x450')
+root.title('Memorizer')
+root.configure(bg="#DBDBDB")
+
+def openFile():
+    fin = askopenfile(title = 'Open File')
+    if fin is not None:
+        listbox.delete(0, END)
+        items = fin.readlines()
+        for item in items:
+            listbox.insert(END, item.strip())
+
+#this function will save an item from the list box
+def saveFile():
+    fout = asksaveasfile()
+    if fout is not None:
+        for item in listbox.get(0,END):
+            print(item.strip(), file=fout)
+    listbox.delete(0,END)
+
+#this function will add an item for the list box    
+def addItem():
+    listbox.insert(END, item.get())
+    item.delete(0,END)
+
+#this function will delete an item for the list box
+def deleteItem():
+    index = listbox.curselection()
+    if index:
+        listbox.delete(index)
+
+#GUI part⬇️
+fOpen = Button(root, text='OPEN', command=openFile, width=15)
+IDelete = Button(root, text='DELETE', command=deleteItem, width=15)
+fSave = Button(root, text='SAVE', command=saveFile, width=15)
+
+lAdd = Button(root, text='ADD', command=addItem, width=15)
+item = Entry(root, width=41)
+
+#Creating frame for list box and scrollbar
+frame = Frame(root)
+scrollbar = Scrollbar(frame, orient='vertical')
+listbox = Listbox(frame, width=67, bg='green', yscrollcommand = scrollbar.set)
+
+scrollbar.config(command=listbox.yview)
+for i in range(1,101):
+    listbox.insert(END,'LIST'+str(i))
+#all placings⬇️
+item.pack(padx=5, pady=5)
+lAdd.pack(padx=5, pady=5 )
+fSave.pack(padx=5, pady=5 )
+fOpen.pack(padx=5, pady=5  )
+IDelete.pack(padx=5, pady=5 )
+listbox.pack(side=LEFT,padx=5)
+scrollbar.pack(side=RIGHT, fill=Y)
+frame.pack()
+
+root.mainloop()
