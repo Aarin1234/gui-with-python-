@@ -1,0 +1,21 @@
+from tkinter import*
+import random
+from functools import partial
+from tkinter import messagebox
+from copy import deepcopy
+
+#sign variable will decide the turn of which player
+sign = 0
+
+#creating an empty board
+global board
+board = [[' 'for x in range(3)]for y in range (3)]
+print(board)
+
+
+def winner(b, l):
+    #Horizontal lines
+    return(
+        (b[0][0]==l and b[0][1]==l and b[0][2]==l)   or
+        (b[1][0]==l and b[1][1]==l and b[1][2]==l)   or
+            )
