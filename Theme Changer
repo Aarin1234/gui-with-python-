@@ -1,0 +1,29 @@
+import tkinter as tk
+from tkinter import ttk
+#Creating the program window
+root = tk.Tk()
+root.geometry('300x200')
+root.title('Theme Changer')
+#Creating the StringVar⬇️
+color_var = tk.StringVar(value='red')
+#Creating the labels⬇️
+bg_label = tk.Label(root, text='Choose a background color')
+title_label = tk.Label(root, text='Theme Changer')
+#Creating the color changing function
+def change_bg():
+    color = color_var.get()
+    root.config(bg=color)
+#Creating the radiobuttons
+radio_red = tk.Radiobutton(root, text="Red", value="red",variable=color_var, command=change_bg, bg="red")
+radio_green = tk.Radiobutton(root, text="Green", value="green",variable=color_var, command=change_bg, bg="green")
+radio_blue = tk.Radiobutton(root, text="Blue", value="blue",variable=color_var, command=change_bg, bg="blue")
+
+#All the placings⬇️
+bg_label.place(x=80, y=40)
+title_label.place(x=105, y=10)
+
+radio_red.place(x=120, y=80)
+radio_green.place(x=120, y=110)
+radio_blue.place(x=120, y=140)
+
+root.mainloop()
