@@ -14,7 +14,7 @@ print(board)
 
 
 def winner(b, l):
-    #Horizontal lines
+    #Horizontal wins
     return(
         (b[0][0]==l and b[0][1]==l and b[0][2]==l)   or
         (b[1][0]==l and b[1][1]==l and b[1][2]==l)   or
@@ -71,6 +71,45 @@ def isfull():
 
 
 #GUI part
-def gameboard_pl(game_broad, l1, l2):
+def gameboard_pl(game_board, l1, l2):
     global button
     button = []
+    for i in range(3):  #Rows⬇️
+        m = 3+i
+        button.append(i)
+        button[i] = []
+        for j in range(3):
+            n = j
+            button[i].append(j)
+            get_t = partial(get_text, i, j,  game_board,l1, l2)
+            button[i][j] = Button(game_board, bd = 5, bg = 'green', fg = 'yellow',
+                                  command = get_t, height=4, width=8)
+            button[i][j].grid(row=m, column=n)
+
+    game_board.mainloop()
+
+#Initialsing the game board to play with another player
+def withplayer(game_board):
+        game_board.destroy()
+        game_board = Tk()
+        game_board.title('Tic Tac Toe')
+        l1 = Button(game_board, text='player 1 : X', width = 10, bg='red', fg='blue')
+        l2 = Button(game_board, text='player 2 : O', width = 10, bg='red', state= DISABLED)
+        l1.grid(row=1, column=1)
+        l2.grid(row=2, column=1)
+        gameboard_pl(game_board, l1, l2)
+
+#main function
+def play():
+    menu = Tk()
+    menu.geometry('275x275')
+    menu.title('Tic Tac Toe')
+    wpl = partial(withplayer, menu)
+    head = Button(menu, text='---Welcome to Tic Tac Toe---',
+                  activeforeground='red',activebackground='grey', bg='blue',
+                  fg='white', bd = 5, width = 500, font = 'summer')
+    head.pack(side='top')
+    menu.mainloop()
+
+if __name__ == '__main__':
+    play()
