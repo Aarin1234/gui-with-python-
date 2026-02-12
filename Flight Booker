@@ -1,0 +1,66 @@
+from tkinter import *
+from tkinter import ttk
+
+# Creating the main window
+root = Tk()
+root.geometry('350x300')
+root.title('Flight Booker')
+
+# Creating a dictionary for the destinations and prices
+dest_prices = {
+    'Paris': 500,
+    'New York': 700,
+    'Tokyo': 900
+}
+
+# Some variables
+destination_var = StringVar()
+class_var = StringVar(value='Economy')
+
+# Creating radiobuttons
+Radiobutton(root, text='Economy', variable=class_var, value='Economy').pack()
+Radiobutton(root, text='Business (+$200)', variable=class_var, value='Business').pack()
+Radiobutton(root, text='First Class (+$500)', variable=class_var, value='First Class').pack()
+
+# Label to display result
+result_label = Label(root, text="Total Ticket Price: $0", font=("Arial", 12, "bold"))
+result_label.pack()
+
+# User defined function to calculate the price
+def calc_price():
+    destination = destination_var.get()
+    travel_class = class_var.get()
+
+    if destination == '':
+        result_label.config(text='Please select a destination')
+        return
+
+    base_price = dest_prices[destination]
+
+    if travel_class == 'Business':
+        extra = 200
+    elif travel_class == 'First Class':
+        extra = 500
+    else:
+        extra = 0
+
+    total_price = base_price + extra
+    result_label.config(text=f"Total Ticket Price: ${total_price}")
+
+# Labels and combobox
+Label(root, text='Flight Booker', font=('Arial', 16, 'bold')).pack(pady=10)
+Label(root, text='Select Destination').pack()
+
+ttk.Combobox(
+    root,
+    textvariable=destination_var,
+    values=list(dest_prices.keys()),
+    state='readonly'
+).pack(pady=5)
+
+Label(root, text='Select Class').pack(pady=(10, 0))
+
+# Creating the price calculate button
+Button(root, text="Pay", command=calc_price).pack(pady=15)
+
+root.mainloop()
