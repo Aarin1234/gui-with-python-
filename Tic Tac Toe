@@ -88,6 +88,42 @@ def gameboard_pl(game_board, l1, l2):
 
     game_board.mainloop()
 
+#single-player against pc
+def pc():
+    possiblemove = []
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == '':
+                possiblemove.append([i, j])
+    move = []
+    if possiblemove == []:
+        return
+    else:
+        for let in ['O','X']:
+            for i in possiblemove:
+                boardcopy = deepcopy(board)
+                boardcopy[i[0]][i[1]] = let
+                if winner(boardcopy, let):
+                    return i
+                possiblmove = [(0,1),(1,2),(2,0)]
+        
+        corner = []
+        for i in possiblemove:
+            if i in [[0,0],[0,2],[2,0],[2,2]]:
+                corner.append(i)
+        if len(corner) > 0:
+            move = random.randint(0, len(corner)-1) 
+            return corner[move]
+        
+        egde = []
+        for i in possiblemove:
+            if i in [[0,1],[1,0],[2,1],[1,2]]:
+                egde.append(i)
+        if len(egde) > 0:
+            move = random.randint(0, len(egde)-1)
+            return egde[move]
+        
+        
 #Initialsing the game board to play with another player
 def withplayer(game_board):
         game_board.destroy()
@@ -106,9 +142,18 @@ def play():
     menu.title('Tic Tac Toe')
     wpl = partial(withplayer, menu)
     head = Button(menu, text='---Welcome to Tic Tac Toe---',
-                  activeforeground='red',activebackground='grey', bg='blue',
+                  activeforeground='red',activebackground='white', bg='yellow',
                   fg='white', bd = 5, width = 500, font = 'summer')
     head.pack(side='top')
+    
+
+    #B1
+
+    B2= Button(menu,text='multiple players', command=wpl,
+            activeforeground = 'green', activebackground='red',bg='yellow',
+            fg='blue', bd= 5, width=500, font='summer')
+    B2.pack(side='top')
+    
     menu.mainloop()
 
 if __name__ == '__main__':
