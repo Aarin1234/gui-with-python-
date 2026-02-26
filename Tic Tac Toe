@@ -115,15 +115,68 @@ def pc():
             move = random.randint(0, len(corner)-1) 
             return corner[move]
         
-        egde = []
+        edge = []
         for i in possiblemove:
             if i in [[0,1],[1,0],[2,1],[1,2]]:
-                egde.append(i)
-        if len(egde) > 0:
-            move = random.randint(0, len(egde)-1)
-            return egde[move]
+                edge.append(i)
+        if len(edge) > 0:
+            move = random.randint(0, len(edge)-1)
+            return edge[move]
         
-        
+# text on button while playing with pc
+def get_text_pc(i,j,gb,l1,l2):
+    global sign
+    if board[i][j] == '':
+        if sign % 2 == 0:
+            l1.config(state=DISABLED)
+            l2.config(state=ACTIVE)
+            board[i][j] = 'X'
+        else:
+            button[i][j].config(state =ACTIVE)
+            l1.config(state=ACTIVE)
+            l2.config(state=DISABLED)
+            board[i][j] = 'O'
+        sign += 1
+        button[i][j].config(text = board[i][j])
+    x = True
+    if winner(board, 'X'):
+        gb.destroy()
+        x = False
+        box = messagebox.showinfo('Winner!', 'Player won the match!')
+    elif winner(board, 'O'):
+        gb.destroy()
+        x = False
+        box = messagebox.showinfo('Winner!', 'Computer won the match!')
+    elif (isfull()):
+        gb.destroy()
+        x = False
+        box = messagebox.showinfo('Tie!', 'Tie game!')
+    if (x):
+        if sign % 2 !=0:
+            move = pc()
+            button[move[0]][move[1]].config(state=DISABLED)
+            get_text_pc(move[0],move[1], gb, l1, l2)
+
+#setup gameboard for player Vs pc
+def gameboard_pc(game_board, l1,l2):
+    global button
+    button = []
+    for i in range(3):
+        m = 3 + i
+        button.append(i)
+        button[i] =   []
+        for j in range(3):
+            n = j
+            button[i].append[j]
+            get_t = partial(get_text_pc, i, j, game_board, l1, l2,)
+
+            button[i][j] = Button(game_board, bd = 5, command = get_t, height = 4,
+                                  width = 8, bg='green', fg='yellow' )
+            button[i][j].grid(row=m, column = n)
+    game_board.mainloop()        
+#initialize the gameboard with pc
+def pc(game_board ):
+    
 #Initialsing the game board to play with another player
 def withplayer(game_board):
         game_board.destroy()
@@ -143,7 +196,7 @@ def play():
     wpl = partial(withplayer, menu)
     head = Button(menu, text='---Welcome to Tic Tac Toe---',
                   activeforeground='red',activebackground='white', bg='yellow',
-                  fg='white', bd = 5, width = 500, font = 'summer')
+                  fg='black', bd = 5, width = 500, font = 'summer')
     head.pack(side='top')
     
 
