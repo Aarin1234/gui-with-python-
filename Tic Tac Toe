@@ -93,7 +93,7 @@ def pc():
     possiblemove = []
     for i in range(len(board)):
         for j in range(len(board[i])):
-            if board[i][j] == '':
+            if board[i][j] == ' ':
                 possiblemove.append([i, j])
     move = []
     if possiblemove == []:
@@ -126,7 +126,7 @@ def pc():
 # text on button while playing with pc
 def get_text_pc(i,j,gb,l1,l2):
     global sign
-    if board[i][j] == '':
+    if board[i][j] == ' ':
         if sign % 2 == 0:
             l1.config(state=DISABLED)
             l2.config(state=ACTIVE)
@@ -181,7 +181,7 @@ def withpc(game_board ):
     l1 = Button(game_board, text='Player : X', width = 10,
                  bg = 'green', fg = 'white')
     l1.grid(row=1, column=1)
-    l2 = Button(game_board, text='Plater : O', width=10, 
+    l2 = Button(game_board, text='Player : O', width=10, 
                 bg='dark blue', state=DISABLED)
     l2.grid(row=2, column= 2)
     gameboard_pc(game_board, l1, l2)
