@@ -1,0 +1,75 @@
+import tkinter
+from tkinter import*
+from  tkinter import messagebox
+import random
+
+root = Tk()
+root.title('Jumbled Word Game')
+
+
+#Creating the lists for the game
+answers = ['apple', 'mango', 'kiwi', 'phone', 'room', 'water',
+            'food','original']
+
+words = ['plape', 'goman', 'wiki','ehopn','moro', 'tawer',
+            'dofo','niliroga']
+
+#Tracking the current index number
+num = random.randrange(0,len(words),1)
+#c = correct ans count
+c = 0
+#total num of question attempted
+d = 0
+#score string to display
+s = ''
+#Label widget to display the score
+l = Label(root)
+
+def reset():
+    global words, answers, num
+    num = random.randrange(0,len(words),1)
+    label.config(text=words[num])
+    e1.delete(0,END)
+
+def default():
+    global words, answers, num
+    label.config(text=words[num])
+
+
+def check_ans():
+    global answers, words, num, c, d, s, l
+    d = int(d)+1
+    var = e1.get()
+    if var == answers[num]:
+       messagebox.showinfo('Congratulations', 'It is the correct answer')
+       c = int(c)+1
+    else: 
+       messagebox.showinfo('Sorry','It is not the correct answer')
+    
+    s = 'Score:'+str(c) + '/' + str(d)
+    l.forget() #Forget is to remove the oldest
+    l = Label(root,text=s, font=('Verdana', 20), fg = 'red', bg='black')
+    l.pack(side= LEFT)
+    reset()
+
+#GUI
+root.geometry('700x500+500+150')
+root.configure(bg= 'black')
+Label(root, text='Lets play jumbled word game!', font=('Verdana',28),
+       fg='yellow', bg='black').pack(pady=5)
+label = Label(root, font=('Verdana', 20), fg='yellow', bg='black')
+label.pack(pady=30)
+
+ans = StringVar()
+e1 = Entry(root, font=('Verdana', 20),textvariable=ans)
+e1.pack()
+
+check_btn = Button(root, text='Check', font=("Comic Sans MS", 18), fg="#147a01", 
+       bg='#bfbfbf', command=check_ans)
+check_btn.place(x=308,y=270)
+reset_btn = Button(root, text='Reset', font=("Comic Sans MS", 18), fg="#ffff00",
+       bg='#bfbfbf', command=reset)
+reset_btn.place(x=310,y=355)
+
+default()
+root.mainloop()
