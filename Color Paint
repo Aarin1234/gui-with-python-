@@ -1,0 +1,41 @@
+from tkinter import*
+from tkinter.colorchooser import askcolor
+
+
+class Paint(object):
+    DEFAULT_COLOR = 'green'
+    def __init__(self):
+        self.root = Tk()
+        self.root.config(bg='yellow')
+        self.pen_button = Button(self.root, text='pen',bg='green',
+                                fg='yellow', bd = 4, command=None)
+        self.pen.grid(row = 0, column = 0)
+        
+        self.brush_button = Button(self.root, text='brush', bg = 'green', fg='yellow'
+                                , bd=5,command=None)
+        self.brush.grid(row = 0, column = 2)
+
+        self.color_button = Button(self.root, text='color', bg='green', fg='yellow',
+                                    bd = 4, command=None)
+        self.color.grid(row=0, column = 3)
+        self.eraser_button = Button(self.root, text='eraser', bg='green', fg='yellow',
+                                    bd= 4, command=None)
+        self.eraser.grid(row = 0, column = 4)
+
+        self.choose_size = Scale(self.root, from_ = 1, to = 20, bg='green', fg='yellow'
+                            , bd = 4, orient = HORIZONTAL)
+        self.choose_size.grid(row = 0, column= 5)
+        self.c = Canvas(self.root, bg = 'white', width = 600, Height = 700)
+        self.c.grid(row= 1 , columnspan=6)
+        
+        self.setup()
+
+        self.root.mainloop()
+
+#Functions
+    def setup(self):
+        pass
+    def use_pen(self):
+        pass
+    def use_brush(self):
+        pass
